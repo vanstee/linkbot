@@ -23,3 +23,32 @@ post '/' do
   add_link(params[:link])
   redirect '/'
 end
+
+__END__
+
+@@links
+<html>
+<head>
+  <style type="text/css">
+    ul > li { width: 400px; list-style: none; margin: 20px 0; padding: 13px 20px; background-color: #ffffff; border-bottom: 1px solid #cccccc; }
+  </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      $('input[name=link]').focus().submit(function(event) { if(event.keyCode === 13){ $('form').submit(); } });
+    });
+  </script>
+</head>
+<body style="background-color: #eeeeee; color: #333333; font: 24px Arial; margin: 40px auto; width: 400px;">
+  <ul>
+    <% @links.each do |link| %>
+      <li><a href="<%= link %>"><%= link %></a></li>
+    <% end %>
+    <li>
+      <form method="post" action="/" style="margin: 0; padding: 0;">
+        <input type="text" name="link" style="width: 360px; height: 30px; font: 24px Arial; border: none; outline: none;" />
+      </form>
+    </li>
+  </ul>
+</body>
+</html>
