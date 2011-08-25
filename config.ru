@@ -1,5 +1,5 @@
 require 'bundler'
 Bundler.require
 
-require 'linkbot'
+require './linkbot'
 run Sinatra::Application
