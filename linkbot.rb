@@ -1,3 +1,7 @@
+require 'bundler/setup'
+require 'sinatra'
+require 'redis'
+
 configure do
   set :logging, false
   enable :inline_templates
@@ -36,14 +40,17 @@ __END__
   <script type="text/javascript">
     $(function() {
       $('input[name=link]').focus().submit(function(event) { if(event.keyCode === 13){ $('form').submit(); } });
+      setInterval(function() { $('ul.links').load('/ ul.links li'); }, 1000);
     });
   </script>
 </head>
 <body style="background-color: #eeeeee; color: #333333; font: 24px Arial; margin: 40px auto; width: 400px;">
-  <ul>
+  <ul class="links">
     <% @links.each do |link| %>
       <li><a href="<%= link %>"><%= link %></a></li>
     <% end %>
+  </ul>
+  <ul>
     <li>
       <form method="post" action="/" style="margin: 0; padding: 0;">
         <input type="text" name="link" style="width: 360px; height: 30px; font: 24px Arial; border: none; outline: none;" />
