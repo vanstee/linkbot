@@ -12,7 +12,7 @@ helpers do
   def add_link(link)
     REDIS.rpush 'links', link
   end
-  
+
   def get_links
     REDIS.lrange 'links', 0, -1
   end
